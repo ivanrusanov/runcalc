@@ -18,13 +18,13 @@
     <div class="row justify-content-center">
       <div class="col-1">
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="timeCheck" value="time">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="timeCheck" value="time" checked>
           <label class="form-check-label" for="timeCheck">Time</label>
         </div>
       </div>
       <div class="col-1">
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="paceCheck" value="pace" checked>
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="paceCheck" value="pace">
           <label class="form-check-label" for="paceCheck">Pace</label>
         </div>
       </div>
@@ -34,12 +34,20 @@
       <div class="col-3">
         <div class="mb-3">
           <label for="distanceSelect" class="form-label">Distance</label>
-          <select class="form-select" id="distanceSelect" aria-label="Distance">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="21.1">Half-marathon</option>
-            <option value="42.2">Marathon</option>
-          </select>
+          <div class="row">
+            <div class="col">
+              <select class="form-select" id="distanceSelect" aria-label="Distance" onchange="handleDistanceSelectChange()">
+                <option value="5000">5</option>
+                <option value="10000">10</option>
+                <option value="21097.5">Half-marathon</option>
+                <option value="42195">Marathon</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
+            <div class="col">
+              <input class="form-control" type="text" id="distanceInput" aria-label="Distance, meters" disabled>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -92,6 +100,26 @@
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
   <script>
+    handleDistanceSelectChange();
+
+    function handleDistanceSelectChange() {
+      if (document.getElementById("distanceSelect").value === "custom") {
+        document.getElementById("distanceInput").disabled = false;
+        document.getElementById("distanceInput").value = "";
+      } else {
+        document.getElementById("distanceInput").disabled = true;
+        document.getElementById("distanceInput").value = document.getElementById("distanceSelect").value;
+      }
+    }
+
+    function getDistance() {
+      if (document.getElementById("distanceSelect").value === "custom") {
+        return document.getElementById("distanceInput").value;
+      } else {
+        return document.getElementById("distanceSelect").value;
+      }
+    }
+
     function calculate() {
       const isTimeSelected = document.getElementById("timeCheck").checked;
       if (isTimeSelected) {
@@ -104,22 +132,22 @@
     function handleTimeSelected() {
       const paceM = document.getElementById("paceMInput").value;
       const paceS = document.getElementById("paceSInput").value;
-      const distance = document.getElementById("distanceSelect").value;
+      const distance = getDistance();
 
-      const res = calculateTime(kmToM(distance), paceMinKmToSecM(paceM, paceS));
-      
+      const res = calculateTime(distance, paceMinKmToSecM(paceM, paceS));
+
       document.getElementById("timeHInput").value = res.hours;
       document.getElementById("timeMInput").value = res.minutes;
       document.getElementById("timeSInput").value = res.seconds;
     }
 
     function handlePaceSelected() {
-      const distance = document.getElementById("distanceSelect").value;
+      const distance = getDistance();
       const timeH = document.getElementById("timeHInput").value;
       const timeM = document.getElementById("timeMInput").value;
       const timeS = document.getElementById("timeSInput").value;
 
-      const res = calculatePace(kmToM(distance), timeToSec(timeH, timeM, timeS));
+      const res = calculatePace(distance, timeToSec(timeH, timeM, timeS));
 
       document.getElementById("paceMInput").value = res.minutes;
       document.getElementById("paceSInput").value = res.seconds;
@@ -135,10 +163,6 @@
       return secondsToTime(seconds / distanceMeters * 1000);
     }
 
-    function kmToM(km) {
-      return km * 1000;
-    }
-
     function paceMinKmToSecM(min, sec) {
       const secKm = timeToSec(0, min, sec);
       return secKm / 1000;
@@ -149,7 +173,7 @@
     }
 
     function secondsToTime(seconds) {
-      var hours   = Math.floor(seconds / 3600);
+      var hours = Math.floor(seconds / 3600);
       var minutes = Math.floor((seconds - (hours * 3600)) / 60);
       var seconds = seconds - (hours * 3600) - (minutes * 60);
       return {
