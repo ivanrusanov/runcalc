@@ -15,80 +15,79 @@
 <body>
 
   <div class="container mt-4">
+
     <div class="row justify-content-center">
-      <div class="col-1">
-        <div class="form-check form-check-inline">
+      <div class="col col-md-3">
+        <div class="form-check">
           <input class="form-check-input" type="radio" name="inlineRadioOptions" id="timeCheck" value="time" checked>
           <label class="form-check-label" for="timeCheck">Time</label>
         </div>
       </div>
-      <div class="col-1">
-        <div class="form-check form-check-inline">
+      <div class="col col-md-3">
+        <div class="form-check">
           <input class="form-check-input" type="radio" name="inlineRadioOptions" id="paceCheck" value="pace">
           <label class="form-check-label" for="paceCheck">Pace</label>
         </div>
       </div>
     </div>
 
+    <div class="row justify-content-center mt-2">
+      <div class="col col-md-3">
+        <label for="distanceSelect" class="form-label">Distance</label>
+      </div>
+      <div class="col col-md-3"></div>
+    </div>
     <div class="row justify-content-center">
-      <div class="col-3">
-        <div class="mb-3">
-          <label for="distanceSelect" class="form-label">Distance</label>
-          <div class="row">
-            <div class="col">
-              <select class="form-select" id="distanceSelect" aria-label="Distance" onchange="handleDistanceSelectChange()">
-                <option value="5000">5</option>
-                <option value="10000">10</option>
-                <option value="21097.5">Half-marathon</option>
-                <option value="42195">Marathon</option>
-                <option value="custom">Custom</option>
-              </select>
-            </div>
-            <div class="col">
-              <input class="form-control" type="text" id="distanceInput" aria-label="Distance, meters" disabled>
-            </div>
-          </div>
-        </div>
+      <div class="col col-md-3">
+        <select class="form-select" id="distanceSelect" aria-label="Distance" onchange="handleDistanceSelectChange()">
+          <option value="5000">5</option>
+          <option value="10000">10</option>
+          <option value="21097.5">Half-marathon</option>
+          <option value="42195">Marathon</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+      <div class="col col-md-3">
+        <input class="form-control" type="text" id="distanceInput" aria-label="Distance, meters" disabled>
       </div>
     </div>
 
+    <div class="row justify-content-center mt-2">
+      <div class="col col-md-3">
+        <label for="paceInput" class="form-label">Pace (min/km)</label>
+      </div>
+      <div class="col col-md-3"></div>
+    </div>
     <div class="row justify-content-center">
-      <div class="col-3">
-        <div class="mb-3">
-          <label for="paceInput" class="form-label">Pace (min/km)</label>
-          <div class="row">
-            <div class="col">
-              <input class="form-control" type="text" id="paceMInput" aria-label="Pace, minutes">
-            </div>
-            <div class="col">
-              <input class="form-control" type="text" id="paceSInput" aria-label="Pace, seconds">
-            </div>
-          </div>
-        </div>
+      <div class="col col-md-3">
+        <input class="form-control" type="text" id="paceMInput" aria-label="Pace, minutes">
+      </div>
+      <div class="col col-md-3">
+        <input class="form-control" type="text" id="paceSInput" aria-label="Pace, seconds">
       </div>
     </div>
 
+    <div class="row justify-content-center mt-2">
+      <div class="col col-md-2">
+        <label for="paceInput" class="form-label">Time (h:m:s)</label>
+      </div>
+      <div class="col col-md-2"></div>
+      <div class="col col-md-2"></div>
+    </div>
     <div class="row justify-content-center">
-      <div class="col-3">
-        <div class="mb-3">
-          <label for="paceInput" class="form-label">Time (h:m:s)</label>
-          <div class="row">
-            <div class="col">
+            <div class="col col-md-2">
               <input class="form-control" type="text" id="timeHInput" aria-label="Time, hours">
             </div>
-            <div class="col">
+            <div class="col col-md-2">
               <input class="form-control" type="text" id="timeMInput" aria-label="Time, minutes">
             </div>
-            <div class="col">
+            <div class="col col-md-2">
               <input class="form-control" type="text" id="timeSInput" aria-label="Time, seconds">
             </div>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <div class="row justify-content-center">
-      <div class="col-3">
+    <div class="row justify-content-center mt-4">
+      <div class="col-6">
         <div class="mb-3">
           <button type="button" class="btn btn-primary" onclick="calculate()">Calculate</button>
         </div>
