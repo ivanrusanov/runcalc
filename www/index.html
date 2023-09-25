@@ -40,8 +40,12 @@
     <div class="row justify-content-center">
       <div class="col col-md-3">
         <select class="form-select" id="distanceSelect" aria-label="Distance" onchange="handleDistanceSelectChange()">
-          <option value="5000">5</option>
-          <option value="10000">10</option>
+          <option value="400">400 m.</option>
+          <option value="800">800 m.</option>
+          <option value="1000">1000 m.</option>
+          <option value="3000">3000 m.</option>
+          <option value="5000">5 km.</option>
+          <option value="10000" selected>10 km.</option>
           <option value="21097.5">Half-marathon</option>
           <option value="42195">Marathon</option>
           <option value="custom">Custom</option>
@@ -91,6 +95,45 @@
         <button type="button" class="btn btn-primary" onclick="calculate()">Calculate</button>
       </div>
     </div>
+
+    <div class="row justify-content-center mt-5">
+      <div class="col col-md-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Distance, m.</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>100</td>
+            <td id="time100m"></td>
+          </tr>
+          <tr>
+            <td>200</td>
+            <td id="time200m"></td>
+          </tr>
+          <tr>
+            <td>400</td>
+            <td id="time400m"></td>
+          </tr>
+          <tr>
+            <td>600</td>
+            <td id="time600m"></td>
+          </tr>
+          <tr>
+            <td>800</td>
+            <td id="time800m"></td>
+          </tr>
+          <tr>
+            <td>1000</td>
+            <td id="time1000m"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
@@ -119,11 +162,34 @@
 
     function calculate() {
       const isTimeSelected = document.getElementById("timeCheck").checked;
+      let pace;
       if (isTimeSelected) {
-        handleTimeSelected();
+        pace = handleTimeSelected();
       } else {
-        handlePaceSelected();
+        pace = handlePaceSelected();
       }
+      fillTable(pace);
+    }
+
+    function fillTable(pace) {
+      document.getElementById("time100m").innerText = timeToString(calculateTime(100, paceMinKmToSecM(pace.minutes, pace.seconds)));
+      document.getElementById("time200m").innerText = timeToString(calculateTime(200, paceMinKmToSecM(pace.minutes, pace.seconds)));
+      document.getElementById("time400m").innerText = timeToString(calculateTime(400, paceMinKmToSecM(pace.minutes, pace.seconds)));
+      document.getElementById("time600m").innerText = timeToString(calculateTime(600, paceMinKmToSecM(pace.minutes, pace.seconds)));
+      document.getElementById("time800m").innerText = timeToString(calculateTime(800, paceMinKmToSecM(pace.minutes, pace.seconds)));
+      document.getElementById("time1000m").innerText = timeToString(calculateTime(1000, paceMinKmToSecM(pace.minutes, pace.seconds)));
+    }
+
+    function timeToString(time) {
+      res = "";
+      if (time.hours > 0) {
+        res += time.hours + " h. ";
+      }
+      if (time.minutes > 0) {
+        res += time.minutes + " m. "
+      }
+      res += time.seconds + " s."
+      return res;
     }
 
     function handleTimeSelected() {
@@ -136,6 +202,12 @@
       document.getElementById("timeHInput").value = res.hours;
       document.getElementById("timeMInput").value = res.minutes;
       document.getElementById("timeSInput").value = res.seconds;
+
+      return {
+        hours: 0,
+        minutes: paceM,
+        seconds: paceS,
+      }
     }
 
     function handlePaceSelected() {
@@ -148,6 +220,8 @@
 
       document.getElementById("paceMInput").value = res.minutes;
       document.getElementById("paceSInput").value = res.seconds;
+      
+      return res;
     }
 
     // Calculates time from distance in meters and pace in second/meter.
