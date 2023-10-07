@@ -16,21 +16,6 @@
 
   <div class="container mt-4">
 
-    <div class="row justify-content-center">
-      <div class="col col-md-3">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="timeCheck" value="time" checked>
-          <label class="form-check-label" for="timeCheck">Time</label>
-        </div>
-      </div>
-      <div class="col col-md-3">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="paceCheck" value="pace">
-          <label class="form-check-label" for="paceCheck">Pace</label>
-        </div>
-      </div>
-    </div>
-
     <div class="row justify-content-center mt-2">
       <div class="col col-md-3">
         <label for="distanceSelect" class="form-label">Distance</label>
@@ -64,10 +49,10 @@
     </div>
     <div class="row justify-content-center">
       <div class="col col-md-3">
-        <input class="form-control" type="text" id="paceMInput" aria-label="Pace, minutes">
+        <input class="form-control" type="text" id="paceMInput" aria-label="Pace, minutes" oninput="calculate('time')">
       </div>
       <div class="col col-md-3">
-        <input class="form-control" type="text" id="paceSInput" aria-label="Pace, seconds">
+        <input class="form-control" type="text" id="paceSInput" aria-label="Pace, seconds" oninput="calculate('time')">
       </div>
     </div>
 
@@ -80,19 +65,13 @@
     </div>
     <div class="row justify-content-center">
       <div class="col col-md-2">
-        <input class="form-control" type="text" id="timeHInput" aria-label="Time, hours">
+        <input class="form-control" type="text" id="timeHInput" aria-label="Time, hours" oninput="calculate('pace')">
       </div>
       <div class="col col-md-2">
-        <input class="form-control" type="text" id="timeMInput" aria-label="Time, minutes">
+        <input class="form-control" type="text" id="timeMInput" aria-label="Time, minutes" oninput="calculate('pace')">
       </div>
       <div class="col col-md-2">
-        <input class="form-control" type="text" id="timeSInput" aria-label="Time, seconds">
-      </div>
-    </div>
-
-    <div class="row justify-content-center mt-4">
-      <div class="col col-md-6">
-        <button type="button" class="btn btn-primary" onclick="calculate()">Calculate</button>
+        <input class="form-control" type="text" id="timeSInput" aria-label="Time, seconds" oninput="calculate('pace')">
       </div>
     </div>
 
@@ -150,6 +129,7 @@
         document.getElementById("distanceInput").disabled = true;
         document.getElementById("distanceInput").value = document.getElementById("distanceSelect").value;
       }
+      calculate("time");
     }
 
     function getDistance() {
@@ -160,13 +140,14 @@
       }
     }
 
-    function calculate() {
-      const isTimeSelected = document.getElementById("timeCheck").checked;
+    function calculate(target) {
       let pace;
-      if (isTimeSelected) {
+      if (target === "pace") {
+        pace = handlePaceSelected();
+      } else if (target === "time") {
         pace = handleTimeSelected();
       } else {
-        pace = handlePaceSelected();
+        return;
       }
       fillTable(pace);
     }

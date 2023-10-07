@@ -1,0 +1,5 @@
+- [ ] Remove "calculate" button and radio buttons and trigger recalculation on changes
+- [ ] Add header
+- [ ] Add "about" page
+- [ ] Add feedback and bugreport capabilities
+- [ ] Register and add domain name  
