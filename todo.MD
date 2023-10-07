@@ -1,4 +1,4 @@
-- [ ] Remove "calculate" button and radio buttons and trigger recalculation on changes
+- [X] Remove "calculate" button and radio buttons and trigger recalculation on changes
 - [ ] Add header
 - [ ] Add "about" page
 - [ ] Add feedback and bugreport capabilities
