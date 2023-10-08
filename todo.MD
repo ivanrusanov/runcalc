@@ -5,3 +5,4 @@
 - [ ] Register and add domain name  
 - [X] Russian localization
 - [ ] Automate deployment 
+- [ ] Form validation
