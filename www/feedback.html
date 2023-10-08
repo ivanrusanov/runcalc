@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="RunCalc" content="Calculator for runners" />
+  <meta charset="utf-8">
+  <title>RunCalc: plan your running routine better</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="ivanrusanov">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <!-- Logo -->
+      <a class="navbar-brand">RunCalc</a>
+
+      <!-- Expand menu button. Normally hidden, apeares when screen size is less than large. -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <!-- Navigation links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- Home -->
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="./index.html"><div class="t_home"></div></a>
+          </li>
+          <!-- Feedback -->
+          <li class="nav-item">
+            <a class="nav-link" href="#"><div class="t_feedback"></div></a>
+          </li>
+        </ul>
+      
+        <!-- Language selector -->
+        <form class="d-flex" role="language">
+          <select class="form-select" id="langSelect" aria-label="Language" onchange="handleLangChange()">
+            <option value="en">Eng</option>
+            <option value="ru">Rus</option>
+          </select>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <p class="t_feedback_page"></p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script type="text/javascript" src="./js/common.js"></script>
+  <script type="text/javascript" src="./js/lang/en.js"></script>
+  <script type="text/javascript" src="./js/lang/ru.js"></script>
+
+  <script>
+    setLangSelector();
+    translateStatic(getLang());
+    handleDistanceSelectChange();
+  </script>
+
+</body>
+
+</html>
