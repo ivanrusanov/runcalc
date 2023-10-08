@@ -3,5 +3,5 @@
 - [ ] Add "about" page
 - [ ] Add feedback and bugreport capabilities
 - [ ] Register and add domain name  
-- [ ] Russian localization
+- [X] Russian localization
 - [ ] Automate deployment 

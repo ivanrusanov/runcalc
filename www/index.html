@@ -13,10 +13,15 @@
 </head>
 
 <body>
-
   <nav class="navbar navbar-dark bg-primary">
     <div class="container-fluid">
-      <span class="navbar-brand mb-0 h1">RunCalc</span>
+      <a class="navbar-brand">RunCalc</a>
+      <form class="d-flex" role="language">
+        <select class="form-select" id="langSelect" aria-label="Language" onchange="handleLangChange()">
+          <option value="en">Eng</option>
+          <option value="ru">Rus</option>
+        </select>
+      </form>
     </div>
   </nav>
 
@@ -24,22 +29,24 @@
 
     <div class="row justify-content-center mt-2">
       <div class="col col-md-3">
-        <label for="distanceSelect" class="form-label">Distance</label>
+        <label for="distanceSelect" class="form-label">
+          <div class="t_distance"></div>
+        </label>
       </div>
       <div class="col col-md-3"></div>
     </div>
     <div class="row justify-content-center">
       <div class="col col-md-3">
         <select class="form-select" id="distanceSelect" aria-label="Distance" onchange="handleDistanceSelectChange()">
-          <option value="400">400 m.</option>
-          <option value="800">800 m.</option>
-          <option value="1000">1000 m.</option>
-          <option value="3000">3000 m.</option>
-          <option value="5000">5 km.</option>
-          <option value="10000" selected>10 km.</option>
-          <option value="21097.5">Half-marathon</option>
-          <option value="42195">Marathon</option>
-          <option value="custom">Custom</option>
+          <option class="t_400_m_t" value="400"></option>
+          <option class="t_800_m" value="800"></option>
+          <option class="t_1000_m" value="1000"></option>
+          <option class="t_3000_m" value="3000"></option>
+          <option class="t_5_km" value="5000"></option>
+          <option class="t_10_km" value="10000" selected></option>
+          <option class="t_half_marathon" value="21097.5"></option>
+          <option class="t_marathon" value="42195"></option>
+          <option class="t_custom" value="custom"></option>
         </select>
       </div>
       <div class="col col-md-3">
@@ -49,7 +56,7 @@
 
     <div class="row justify-content-center mt-2">
       <div class="col col-md-3">
-        <label for="paceInput" class="form-label">Pace (min/km)</label>
+        <label for="paceInput" class="form-label"><div class="t_pace_min_km"></div></label>
       </div>
       <div class="col col-md-3"></div>
     </div>
@@ -64,7 +71,7 @@
 
     <div class="row justify-content-center mt-2">
       <div class="col col-md-2">
-        <label for="paceInput" class="form-label">Time (h:m:s)</label>
+        <label for="paceInput" class="form-label"><div class="t_time_h_m_s"></div></label>
       </div>
       <div class="col col-md-2"></div>
       <div class="col col-md-2"></div>
@@ -83,49 +90,102 @@
 
     <div class="row justify-content-center mt-5">
       <div class="col col-md-6">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Distance, m.</th>
-            <th>Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>100</td>
-            <td id="time100m"></td>
-          </tr>
-          <tr>
-            <td>200</td>
-            <td id="time200m"></td>
-          </tr>
-          <tr>
-            <td>400</td>
-            <td id="time400m"></td>
-          </tr>
-          <tr>
-            <td>600</td>
-            <td id="time600m"></td>
-          </tr>
-          <tr>
-            <td>800</td>
-            <td id="time800m"></td>
-          </tr>
-          <tr>
-            <td>1000</td>
-            <td id="time1000m"></td>
-          </tr>
-        </tbody>
-      </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><div class="t_distance_m"></div></th>
+              <th><div class="t_time"></div></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>100</td>
+              <td id="time100m"></td>
+            </tr>
+            <tr>
+              <td>200</td>
+              <td id="time200m"></td>
+            </tr>
+            <tr>
+              <td>400</td>
+              <td id="time400m"></td>
+            </tr>
+            <tr>
+              <td>600</td>
+              <td id="time600m"></td>
+            </tr>
+            <tr>
+              <td>800</td>
+              <td id="time800m"></td>
+            </tr>
+            <tr>
+              <td>1000</td>
+              <td id="time1000m"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./js/lang/en.js"></script>
+  <script type="text/javascript" src="./js/lang/ru.js"></script>
+
   <script>
+    setLangSelector();
+    translateStatic(getLang());
     handleDistanceSelectChange();
+
+    function setLangSelector() {
+      document.getElementById("langSelect").value = getLang();
+    }
+
+    function handleLangChange() {
+      setLang(document.getElementById("langSelect").value);
+      location.reload();
+    }
+
+    function getLang() {
+      let lang = localStorage.getItem('language');
+      if (lang == null) {
+        lang = navigator.language || navigator.userLanguage;
+      }
+
+      if (lang == null || lang.includes("ru")) {
+        return "ru";
+      }
+      
+      return "en";
+    }
+
+    function setLang(lang) {
+      localStorage.setItem('language', lang);
+    }
+
+    function getDictionary(lang) {
+      if (lang.includes("ru")) {
+        return ru_lang;
+      }
+      return en_lang;
+    }
+
+    function translateStatic(lang) {
+      let dictionary = getDictionary(lang);
+
+      for (const key in dictionary) {
+        const selector = "." + key;
+        console.log(selector);
+        document.querySelectorAll(selector).forEach(elem => elem.innerHTML = dictionary[key]);
+      }
+    }
+
+    function translate(key, lang) {
+      return getDictionary(lang)[key];
+    }
 
     function handleDistanceSelectChange() {
       if (document.getElementById("distanceSelect").value === "custom") {
@@ -170,12 +230,12 @@
     function timeToString(time) {
       res = "";
       if (time.hours > 0) {
-        res += time.hours + " h. ";
+        res += time.hours + " " + translate("t_h", getLang()) + " ";
       }
       if (time.minutes > 0) {
-        res += time.minutes + " m. "
+        res += time.minutes + " " + translate("t_m", getLang()) + " ";
       }
-      res += time.seconds + " s."
+      res += time.seconds + " " + translate("t_s", getLang());
       return res;
     }
 
@@ -207,7 +267,7 @@
 
       document.getElementById("paceMInput").value = res.minutes;
       document.getElementById("paceSInput").value = res.seconds;
-      
+
       return res;
     }
 
