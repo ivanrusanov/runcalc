@@ -36,7 +36,6 @@ function translateStatic(lang) {
 
     for (const key in dictionary) {
         const selector = "." + key;
-        console.log(selector);
         document.querySelectorAll(selector).forEach(elem => elem.innerHTML = dictionary[key]);
     }
 }
