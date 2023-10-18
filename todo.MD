@@ -2,7 +2,7 @@
 - [X] Add header
 - [ ] Add "about" page
 - [X] Add feedback and bugreport capabilities
-- [ ] Register and add domain name  
+- [X] Register and add domain name  
 - [X] Russian localization
 - [ ] Automate deployment 
 - [ ] Form validation
