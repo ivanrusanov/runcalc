@@ -6,3 +6,4 @@
 - [X] Russian localization
 - [ ] Automate deployment 
 - [ ] Form validation
+- [ ] Add metrics to the page
