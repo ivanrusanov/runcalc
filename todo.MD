@@ -7,3 +7,5 @@
 - [ ] Automate deployment 
 - [ ] Form validation
 - [ ] Add metrics to the page
+- [X] SSL
+- [ ] For now both SSL and unsecure endpoints are available. Make SSL default option.
