@@ -1,9 +1,10 @@
 - [X] Remove "calculate" button and radio buttons and trigger recalculation on changes
 - [X] Add header
-- [ ] Add "about" page
+- [ ] Add "About" page
 - [X] Add feedback and bugreport capabilities
 - [X] Register and add domain name  
 - [X] Russian localization
+- [X] Automate image build and publish
 - [ ] Automate deployment 
 - [ ] Form validation
 - [ ] Add metrics to the page
