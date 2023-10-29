@@ -1,5 +1,11 @@
+version: '3.9'
+
 services:
   frontend:
-    build: .
     ports: 
-      - 8080:8080
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - /etc/nginx/ssl/run-info/run-info.crt:/usr/nginx/run-info/run-info.crt
+      - /etc/nginx/ssl/run-info/run-info.key:/usr/nginx/run-info/run-info.key
