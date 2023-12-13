@@ -43,3 +43,9 @@ function translateStatic(lang) {
 function translate(key, lang) {
     return getDictionary(lang)[key];
 }
+
+function getLocalizedMessage(key) {
+    // const lang = getLang();
+    // return translate(key, lang);
+    return "Test message: " + key;
+}
