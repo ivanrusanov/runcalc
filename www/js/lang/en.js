@@ -1,6 +1,7 @@
 const en_lang = {
     "t_home": "Home",
     "t_feedback": "Feedback",
+    "t_about": "About",
     "t_feedback_page": "Dear user, if you have any ideas how to improve RunCalc, feel free to leave your feedback through <a href=\"https://docs.google.com/forms/d/e/1FAIpQLScBaA_ViGPuUJm9qiRkuuQRdki7MRdtDBJYSa8JzjElzP4GZQ/viewform\" target=\"_blank\">the form</a>.",
     "t_distance": "Distance",
     "t_400_m": "400 m.",

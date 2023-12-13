@@ -56,13 +56,13 @@
           </li>
           <!-- Feedback -->
           <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a class="nav-link" href="./feedback.html">
               <div class="t_feedback"></div>
             </a>
           </li>
           <!-- About -->
           <li class="nav-item">
-            <a class="nav-link" href="./about.html">
+            <a class="nav-link active" href="#">
               <div class="t_about"></div>
             </a>
           </li>
@@ -80,7 +80,7 @@
   </nav>
 
   <div class="container mt-4">
-    <p class="t_feedback_page"></p>
+    <p id="p_about_content"></p>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
@@ -95,7 +95,36 @@
   <script>
     setLangSelector();
     translateStatic(getLang());
-    handleDistanceSelectChange();
+
+    if (getLang() === 'ru') {
+        document.getElementById("p_about_content").innerHTML = "\
+        <p>Привет!</p> \
+        <p>Меня зовут Иван и я бегун-любитель. Как любой человек серьезно увлекающийся бегом, я сталкиваюсь с необходимостью \
+        посчитать за какое время мне нужно бежать круг по стадиону во время интервальной тренировки. Или прикинуть за какое \
+        время нужно пробежать темповую тренировку. А еще я планирую старты и мне важно знать как быстро нужно бежать километр, \
+        чтобы преодолеть дистанцию за определенное время и улучшить свой результат.</p>\
+        <p>Поэтому, я сделал простой калькулятор, который позволяет ответить на эти вопросы. Калькулятор я выложил в открытый \
+        доступ, в надежде что он будет полезен кому-нибудь еще. </p>\
+        <p>Если калькулятор вам понравился, то вы можете помочь его развивать. Например, предлагая свои идеи улучшений и сообщая \
+        об ошибках. Для этого можно воспользоваться формой в разделе \"Обратная связь\".</p>\
+        <p>Всем легких ног!</p>\
+        <p>Иван Русанов</p>\
+        ";  
+    } else {
+      document.getElementById("p_about_content").innerHTML = "\
+        <p>Hello!</p>\
+        <p>My name is Ivan. I'm an amateur runner. As a huge fan of running, I do different kinds of training sessions and plan my \
+        running routine. I've found that sometimes I need to know lap time for interval training session on stadium. Or how much \
+        time tempo training session would take if I run with a specific pace. Or to know how fast I should run each kilometer to \
+        improve my personal best.</p>\
+        <p>To address this questions, I've implemented this simple and minimalistic calculator. I've made it open and free to use in \
+        case somebody else will find it useful.</p> \
+        <p>If you like this calculator, you can help to make it better. Promote your feature or report a bug through the form on \
+        \"Feedback\" page.</p>\
+        <p>Wish you a great run!</p>\
+        <p>Ivan Rusanov</p>\
+        ";
+    }
   </script>
 
 </body>
